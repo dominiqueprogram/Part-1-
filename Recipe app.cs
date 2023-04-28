@@ -108,9 +108,15 @@ namespace RecipeApp
 
                 switch (choice)
                 {
+
                     case 1:
                         Console.WriteLine("Enter the number of ingredients:");
-                        int numIngredients = int.Parse(Console.ReadLine());
+                        int numIngredients;
+
+                        while (!int.TryParse(Console.ReadLine(), out numIngredients) || numIngredients <= 0)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a positive integer for the number of ingredients:");
+                        }
 
                         Ingredient[] ingredients = new Ingredient[numIngredients];
 
@@ -121,8 +127,15 @@ namespace RecipeApp
                             Console.WriteLine($"Enter the name of ingredient {i + 1}:");
                             ingredient.Name = Console.ReadLine();
 
-                            Console.WriteLine($"Enter the quantity of ingredient {i + 1}:");
-                            ingredient.Quantity = double.Parse(Console.ReadLine());
+                            double quantity;
+                            Console.WriteLine($"Enter the quantity of ingredient {i + 1} (in decimal form):");
+
+                            while (!double.TryParse(Console.ReadLine(), out quantity) || quantity <= 0)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a positive decimal for the quantity:");
+                            }
+
+                            ingredient.Quantity = quantity;
 
                             Console.WriteLine($"Enter the unit of measurement of ingredient {i + 1}:");
                             ingredient.Unit = Console.ReadLine();
@@ -132,7 +145,10 @@ namespace RecipeApp
 
                         recipe.Ingredients = ingredients;
 
+                        Console.WriteLine();
+
                         break;
+
 
                     case 2:
                         Console.WriteLine("Enter the number of steps:");
