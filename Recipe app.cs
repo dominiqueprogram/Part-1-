@@ -1,7 +1,10 @@
+using Microsoft.VisualBasic.FileIO;
 using System;
+using System.IO;
 
 namespace RecipeApp
 {
+    // Ingredient class represents an ingredient in a recipe
     public class Ingredient
     {
         public string Name { get; set; }
@@ -9,11 +12,13 @@ namespace RecipeApp
         public string Unit { get; set; }
     }
 
+    // Step class represents step in a recipe
     public class Step
     {
         public string Description { get; set; }
     }
 
+   // Recipe class with properties for Ingredients and Steps.The constructor initializes these properties with empty arrays.
     public class Recipe
     {
         public Ingredient[] Ingredients { get; set; }
@@ -26,6 +31,7 @@ namespace RecipeApp
             Steps = new Step[0];
         }
 
+     // Display method is used to print the recipe to the console with different colors for the different parts of the recipe, such as ingredients and steps.
         public void Display()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -55,6 +61,8 @@ namespace RecipeApp
             Console.WriteLine("***************");
         }
 
+        // Scale method is used to multiply the quantity of each ingredient by a scaling factor specified as an argument.
+
         public void Scale(double factor)
         {
             foreach (var ingredient in Ingredients)
@@ -63,6 +71,8 @@ namespace RecipeApp
             }
         }
 
+
+        //Reset method is used to divide the quantity of each ingredient by a reset factor specified as an argument.
         public void Reset(double factor2)
         {
             foreach (var ingredient in Ingredients)
@@ -71,6 +81,7 @@ namespace RecipeApp
             }
         }
 
+        // Clear method is used to empty the Ingredients and Steps arrays, effectively clearing the recipe.
         public void Clear()
         {
             Ingredients = new Ingredient[0];
@@ -78,17 +89,21 @@ namespace RecipeApp
         }
     }
 
+    // This is the main program which runs the Recipe App.
     class Program
     {
         static void Main(string[] args)
         {
+            // It starts by displaying a welcome message and creating a new Recipe object
             Console.WriteLine("*** Welcome to Recipe App ***");
             Console.WriteLine();
 
             Recipe recipe = new Recipe();
 
+            //Then it enters a while loop which displays a menu of options for the user to choose from.
             while (true)
             {
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Select an option:");
 
@@ -117,7 +132,7 @@ namespace RecipeApp
 
                 switch (choice)
                 {
-
+                    // For option 1, the user enters the details of the ingredients and these details are stored in an array of Ingredient objects.
                     case 1:
                         Console.Write("*** Ingredient(s) detail(s) ***");
                         Console.WriteLine();
@@ -169,7 +184,7 @@ namespace RecipeApp
 
                         break;
 
-
+                    // For option 2, the user enters the details of the steps and these details are stored in an array of Step objects.
                     case 2:
                         Console.Write("*** Step(s) detail(s) ***");
                         Console.WriteLine();
@@ -198,7 +213,7 @@ namespace RecipeApp
 
                         break;
 
-
+                    // For option 3, the Recipe object's Display method is called to display the recipe details to the console.
                     case 3:
                         recipe.Display();
 
@@ -206,7 +221,7 @@ namespace RecipeApp
 
                         break;
 
-
+                    // For option 4, the user enters a scale factor and the Recipe object's Scale method is called to scale the recipe by that factor.
                     case 4:
                         bool validFactor = false;
                         double factor = 0;
@@ -247,7 +262,7 @@ namespace RecipeApp
 
                         break;
 
-
+                    // For option 5, the user is prompted to re-enter the captured scale factor and the Recipe object's Reset method is called to reset the recipe to the original scale.
                     case 5:
                         bool validFactor2 = false;
                         double factor2 = 0;
@@ -286,7 +301,7 @@ namespace RecipeApp
                         break;
 
 
-
+                        // For option 6, the Recipe object's Clear method is called to clear all the recipe details.
                     case 6:
                         recipe.Clear();
 
@@ -294,6 +309,7 @@ namespace RecipeApp
 
                         break;
 
+                    // For option 7, the program exits with a thank you message.
                     case 7:
                         Console.WriteLine("Thank you for using Recipe App!");
                         Environment.Exit(0);
