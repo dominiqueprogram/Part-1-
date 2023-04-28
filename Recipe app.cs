@@ -19,6 +19,7 @@ namespace RecipeApp
         public Ingredient[] Ingredients { get; set; }
         public Step[] Steps { get; set; }
 
+
         public Recipe()
         {
             Ingredients = new Ingredient[0];
@@ -62,11 +63,11 @@ namespace RecipeApp
             }
         }
 
-        public void Reset()
+        public void Reset(double factor2)
         {
             foreach (var ingredient in Ingredients)
             {
-                ingredient.Quantity /= 2;
+                ingredient.Quantity /= factor2;
             }
         }
 
@@ -118,7 +119,7 @@ namespace RecipeApp
                 {
 
                     case 1:
-                        Console.Write("*** Ingredients details ***");
+                        Console.Write("*** Ingredient(s) detail(s) ***");
                         Console.WriteLine();
 
                         Console.Write("Enter the number of ingredients: ");
@@ -156,18 +157,23 @@ namespace RecipeApp
 
                         Console.WriteLine();
 
-                        Console.Write("Ingredients details captured successfully!");
+                        Console.Write("Ingredient(s) detail(s) captured successfully!");
 
-                        Console.WriteLine();
+                        
 
                         recipe.Ingredients = ingredients;
 
-                        
+                        Console.WriteLine();
+
+
 
                         break;
 
 
                     case 2:
+                        Console.Write("*** Step(s) detail(s) ***");
+                        Console.WriteLine();
+
                         Console.Write("Enter the number of steps: ");
                         int numSteps = int.Parse(Console.ReadLine());
 
@@ -183,6 +189,9 @@ namespace RecipeApp
                             steps[i] = step;
                         }
 
+                        Console.WriteLine();
+
+                        Console.Write("Step(s) detail(s) captured successfully!");
                         recipe.Steps = steps;
 
                         Console.WriteLine();
@@ -202,10 +211,11 @@ namespace RecipeApp
                         bool validFactor = false;
                         double factor = 0;
 
+                        Console.Write("Enter the scale factor (0.5, 2, or 3): ");
+                        string input = Console.ReadLine(); 
+
                         while (!validFactor)
                         {
-                            Console.Write("Enter the scale factor (0.5, 2, or 3): ");
-                            string input = Console.ReadLine();
 
                             if (double.TryParse(input, out factor))
                             {
@@ -231,18 +241,51 @@ namespace RecipeApp
                         Console.WriteLine("Scaled recipe:");
                         Console.WriteLine();
                         recipe.Display();
-                       
+
+                        Console.WriteLine();
+
 
                         break;
 
 
                     case 5:
-                        recipe.Reset();
-                        recipe.Display();
+                        bool validFactor2 = false;
+                        double factor2 = 0;
 
-                        Console.WriteLine();
+                        while (!validFactor2)
+                        {
+                            Console.Write("Re-Enter the captured scale factor (0.5, 2, or 3): ");
+                            string input2 = Console.ReadLine();
 
+                            if (double.TryParse(input2, out factor2))
+                            {
+                                if (factor2 == 0.5 || factor2 == 2 || factor2 == 3)
+                                {
+                                    recipe.Reset(factor2);
+
+                                    Console.WriteLine();
+
+                                    Console.WriteLine("Resettled recipe:");
+                                    Console.WriteLine();
+                                    recipe.Display();
+
+                                    Console.WriteLine();
+
+                                    validFactor2 = true; // exit the loop if the factor is valid
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid scale factor!");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
+                        }
                         break;
+
+
 
                     case 6:
                         recipe.Clear();
