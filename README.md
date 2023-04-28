@@ -16,5 +16,5 @@ Then it enters a while loop which displays a menu of options for the user to cho
 The user can enter the details of the ingredients and steps, display the recipe, scale the recipe, reset the recipe, clear the recipe, or exit the program. 
 The program uses Console.ReadLine to get input from the user and Console.WriteLine to display output to the user.
 
-2. Link to your GitHub repository (No need)
+2. Link to my GitHub repository (No need)
 
