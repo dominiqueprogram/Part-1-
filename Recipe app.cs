@@ -118,12 +118,15 @@ namespace RecipeApp
                 {
 
                     case 1:
-                        Console.WriteLine("Enter the number of ingredients:");
+                        Console.Write("*** Ingredients details ***");
+                        Console.WriteLine();
+
+                        Console.Write("Enter the number of ingredients: ");
                         int numIngredients;
 
                         while (!int.TryParse(Console.ReadLine(), out numIngredients) || numIngredients <= 0)
                         {
-                            Console.WriteLine("Invalid input. Please enter a positive integer for the number of ingredients:");
+                            Console.Write("Invalid input. Please enter a positive integer for the number of ingredients: ");
                         }
 
                         Ingredient[] ingredients = new Ingredient[numIngredients];
@@ -132,34 +135,40 @@ namespace RecipeApp
                         {
                             Ingredient ingredient = new Ingredient();
 
-                            Console.WriteLine($"Enter the name of ingredient {i + 1}:");
+                            Console.Write($"Enter the name of ingredient {i + 1}: ");
                             ingredient.Name = Console.ReadLine();
 
                             double quantity;
-                            Console.WriteLine($"Enter the quantity of ingredient {i + 1} (in decimal form):");
+                            Console.Write($"Enter the quantity of ingredient {i + 1} (in decimal form): ");
 
                             while (!double.TryParse(Console.ReadLine(), out quantity) || quantity <= 0)
                             {
-                                Console.WriteLine("Invalid input. Please enter a positive interger for the quantity:");
+                                Console.Write("Invalid input. Please enter a positive interger for the quantity: ");
                             }
 
                             ingredient.Quantity = quantity;
 
-                            Console.WriteLine($"Enter the unit of measurement of ingredient {i + 1}:");
+                            Console.Write($"Enter the unit of measurement of ingredient {i + 1}: ");
                             ingredient.Unit = Console.ReadLine();
 
                             ingredients[i] = ingredient;
                         }
 
-                        recipe.Ingredients = ingredients;
+                        Console.WriteLine();
+
+                        Console.Write("Ingredients details captured successfully!");
 
                         Console.WriteLine();
+
+                        recipe.Ingredients = ingredients;
+
+                        
 
                         break;
 
 
                     case 2:
-                        Console.WriteLine("Enter the number of steps:");
+                        Console.Write("Enter the number of steps: ");
                         int numSteps = int.Parse(Console.ReadLine());
 
                         Step[] steps = new Step[numSteps];
@@ -168,7 +177,7 @@ namespace RecipeApp
                         {
                             Step step = new Step();
 
-                            Console.WriteLine($"Enter the description of step {i + 1}:");
+                            Console.Write($"Enter the description of step {i + 1}: ");
                             step.Description = Console.ReadLine();
 
                             steps[i] = step;
@@ -180,6 +189,7 @@ namespace RecipeApp
 
                         break;
 
+
                     case 3:
                         recipe.Display();
 
@@ -187,16 +197,44 @@ namespace RecipeApp
 
                         break;
 
+
                     case 4:
-                        Console.WriteLine("Enter the scale factor (0.5, 2, or 3):");
-                        double factor = double.Parse(Console.ReadLine());
+                        bool validFactor = false;
+                        double factor = 0;
+
+                        while (!validFactor)
+                        {
+                            Console.Write("Enter the scale factor (0.5, 2, or 3): ");
+                            string input = Console.ReadLine();
+
+                            if (double.TryParse(input, out factor))
+                            {
+                                if (factor == 0.5 || factor == 2 || factor == 3)
+                                {
+                                    validFactor = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid factor. Please enter 0.5, 2, or 3.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter a number.");
+                            }
+                        }
 
                         recipe.Scale(factor);
-                        recipe.Display();
 
                         Console.WriteLine();
 
+                        Console.WriteLine("Scaled recipe:");
+                        Console.WriteLine();
+                        recipe.Display();
+                       
+
                         break;
+
 
                     case 5:
                         recipe.Reset();
