@@ -73,6 +73,9 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("*** Welcome to Recipe App ***");
+            Console.WriteLine();
+
             Recipe recipe = new Recipe();
 
             while (true)
@@ -80,7 +83,7 @@ namespace RecipeApp
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Select an option:");
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("1. Enter ingredient details");
                 Console.WriteLine("2. Enter step details");
                 Console.WriteLine("3. Display recipe");
@@ -89,7 +92,19 @@ namespace RecipeApp
                 Console.WriteLine("6. Clear recipe");
                 Console.WriteLine("7. Exit");
 
+                Console.WriteLine();
+
+                Console.WriteLine("****************************");
+
+                Console.WriteLine();
+
                 int choice = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+
+                Console.WriteLine("Selected option: " + choice);
+
+                Console.WriteLine();
 
                 switch (choice)
                 {
@@ -163,9 +178,12 @@ namespace RecipeApp
                         break;
 
                     case 7:
+                        Console.WriteLine("Thank you for using Recipe App!");
                         Environment.Exit(0);
                         break;
+
                 }
+
             }
         }
     }
