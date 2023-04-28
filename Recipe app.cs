@@ -27,8 +27,12 @@ namespace RecipeApp
 
         public void Display()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("*** Recipe ***");
+            Console.WriteLine();
+
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Ingredients:\n");
+            Console.WriteLine("Ingredient(s):\n");
 
             Console.ForegroundColor = ConsoleColor.White;
             foreach (var ingredient in Ingredients)
@@ -37,13 +41,17 @@ namespace RecipeApp
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nSteps:\n");
+            Console.WriteLine("\nStep(s):\n");
 
             Console.ForegroundColor = ConsoleColor.White;
             for (int i = 0; i < Steps.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Steps[i].Description}");
             }
+
+            Console.WriteLine() ;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("***************");
         }
 
         public void Scale(double factor)
@@ -132,7 +140,7 @@ namespace RecipeApp
 
                             while (!double.TryParse(Console.ReadLine(), out quantity) || quantity <= 0)
                             {
-                                Console.WriteLine("Invalid input. Please enter a positive decimal for the quantity:");
+                                Console.WriteLine("Invalid input. Please enter a positive interger for the quantity:");
                             }
 
                             ingredient.Quantity = quantity;
@@ -168,10 +176,15 @@ namespace RecipeApp
 
                         recipe.Steps = steps;
 
+                        Console.WriteLine();
+
                         break;
 
                     case 3:
                         recipe.Display();
+
+                        Console.WriteLine();
+
                         break;
 
                     case 4:
@@ -181,16 +194,23 @@ namespace RecipeApp
                         recipe.Scale(factor);
                         recipe.Display();
 
+                        Console.WriteLine();
+
                         break;
 
                     case 5:
                         recipe.Reset();
                         recipe.Display();
 
+                        Console.WriteLine();
+
                         break;
 
                     case 6:
                         recipe.Clear();
+
+                        Console.WriteLine();
+
                         break;
 
                     case 7:
