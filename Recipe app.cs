@@ -3,6 +3,7 @@ using System;
 using System.IO;
 
 namespace RecipeApp
+    
 {
     // Ingredient class represents an ingredient in a recipe
     public class Ingredient
