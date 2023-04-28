@@ -27,13 +27,19 @@ namespace RecipeApp
 
         public void Display()
         {
-            Console.WriteLine("Ingredients:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ingredients:\n");
+
+            Console.ForegroundColor = ConsoleColor.White;
             foreach (var ingredient in Ingredients)
             {
                 Console.WriteLine($"{ingredient.Quantity} {ingredient.Unit} {ingredient.Name}");
             }
 
-            Console.WriteLine("\nSteps:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nSteps:\n");
+
+            Console.ForegroundColor = ConsoleColor.White;
             for (int i = 0; i < Steps.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Steps[i].Description}");
@@ -71,7 +77,10 @@ namespace RecipeApp
 
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Select an option:");
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("1. Enter ingredient details");
                 Console.WriteLine("2. Enter step details");
                 Console.WriteLine("3. Display recipe");
